@@ -12,10 +12,12 @@ import reactor.core.publisher.Mono;
 public class ResponseBindingResultErrors {
 
     public Mono<ResponseEntity<Map<String, Object>>> BindingResultErrors(
-            BindingResult bindinResult) {
+        BindingResult bindinResult
+    ) {
         Response response = new Response(
-                bindinResult.getAllErrors().stream().findFirst().get().getDefaultMessage().toString(),
-                HttpStatus.NOT_ACCEPTABLE);
+            bindinResult.getAllErrors().stream().findFirst().get().getDefaultMessage().toString(),
+            HttpStatus.NOT_ACCEPTABLE
+        );
 
         return Mono.just(ResponseEntity.internalServerError().body(response.getResponse()));
     }
